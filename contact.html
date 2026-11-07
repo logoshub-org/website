@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Logos Hub</title>
+    <meta name="description" content="Send a message to the Logos Hub team.">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/contact-form.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-area">
+                <img class="logo-icon" src="assets/img/logo.png" alt="Logos Hub logo">
+                <span class="logo-text">LOGOS HUB</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="legal">
+        <h1>Contact Us</h1>
+        <p class="updated">Questions, feedback or requests? Send us a message and we will reply by email.</p>
+
+        <form id="contact-form" class="contact-form" novalidate>
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
+            </div>
+
+            <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" maxlength="5000" required></textarea>
+            </div>
+
+            <!-- Spam trap: real visitors never see or fill this in. -->
+            <div class="hp" aria-hidden="true">
+                <label for="company_url">Leave this field empty</label>
+                <input type="text" id="company_url" name="company_url" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn-cta">Send message</button>
+
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+            <noscript><p class="form-status error">Please turn on JavaScript to send a message.</p></noscript>
+        </form>
+
+        <p class="form-note">Please do not include sensitive personal information in your message. See our <a href="privacy.html">Privacy Policy</a> for how we handle what you send.</p>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <img class="footer-logo" src="assets/img/logo.png" alt="Logos Hub logo">
+            <p>&copy; 2026 Logos Hub. All rights reserved. www.logoshub.org</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

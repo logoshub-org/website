@@ -267,6 +267,96 @@ nav a:hover {
     color: var(--primary-purple);
 }
 
+/* Contact form */
+.contact-form {
+    margin-top: 1.5rem;
+}
+
+.field {
+    margin-bottom: 1.2rem;
+}
+
+.field label {
+    display: block;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.35rem;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #cfd6da;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: var(--text-main);
+    background: #ffffff;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: 2px solid var(--primary-purple);
+    outline-offset: 1px;
+    border-color: var(--primary-purple);
+}
+
+.field textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+button.btn-cta {
+    border: 0;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button.btn-cta:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-status {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+}
+
+.form-status:empty {
+    display: none;
+}
+
+.form-status.info {
+    background: #f0f4f6;
+    color: var(--slate-gray);
+}
+
+.form-status.success {
+    background: #eaf6ec;
+    color: #1d6b2f;
+}
+
+.form-status.error {
+    background: #fdecec;
+    color: #a12a2a;
+}
+
+.legal .form-note {
+    margin-top: 2rem;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+/* Spam trap field: kept off-screen, not display:none, so simple bots still fill it */
+.hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 /* Footer */
 footer {
     background-color: #ffffff;
