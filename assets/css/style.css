@@ -1,0 +1,325 @@
+:root {
+    --primary-purple: #8E24AA;
+    --slate-gray: #536872;
+    --dark-bg: #1a1a1a;
+    --light-bg: #fdfdfd;
+    --text-main: #333333;
+    --text-muted: #666666;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-family: 'Noto Serif', 'Segoe UI', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 1px;
+    word-spacing: 0.15em;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--slate-gray);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary-purple);
+}
+
+.btn-cta {
+    background-color: var(--primary-purple);
+    color: #ffffff;
+    padding: 0.6rem 1.3rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-cta:hover {
+    background-color: #7B1FA2;
+}
+
+/* Hero Section */
+.hero {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f9f5fc 0%, #f0f4f6 100%);
+    border-bottom: 1px solid #eef2f4;
+}
+
+.hero-container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.hero-logo-large {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+    font-family: 'Noto Serif', 'Segoe UI', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+    word-spacing: 0.15em;
+}
+
+.hero h2 {
+    font-size: 1.6rem;
+    color: var(--slate-gray);
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: var(--text-main);
+    max-width: 750px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--slate-gray);
+    border: 2px solid var(--slate-gray);
+    padding: 0.6rem 1.3rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--slate-gray);
+    color: #ffffff;
+}
+
+/* Mission / Focus Section (not currently used on the page; kept for later) */
+.mission-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: var(--primary-purple);
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+.grid-focus {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.focus-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s;
+}
+
+.focus-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-purple);
+}
+
+.focus-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #000000;
+}
+
+.focus-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Legal pages (privacy.html, terms.html) */
+.legal {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem 2rem;
+}
+
+.legal h1 {
+    font-family: 'Noto Serif', 'Segoe UI', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.legal .updated {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+.legal h2 {
+    font-size: 1.3rem;
+    color: #000000;
+    margin: 2.2rem 0 0.7rem 0;
+}
+
+.legal p,
+.legal li {
+    color: var(--text-main);
+    font-size: 1.02rem;
+}
+
+.legal p {
+    margin-bottom: 1rem;
+}
+
+.legal ul {
+    margin: 0 0 1rem 1.4rem;
+}
+
+.legal li {
+    margin-bottom: 0.4rem;
+}
+
+.legal a {
+    color: var(--primary-purple);
+}
+
+/* Footer */
+footer {
+    background-color: #ffffff;
+    border-top: 1px solid #eef2f4;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.footer p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--slate-gray);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-purple);
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+
+    .legal h1 {
+        font-size: 2rem;
+    }
+
+    .footer-links {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+    }
+}
