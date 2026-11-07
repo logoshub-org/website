@@ -93,7 +93,14 @@ export async function handleContact(request, env, connect) {
         return reply({ ok: false, error: 'Please write a message between 10 and 5000 characters.' }, 400);
     }
 
-    if (!env.SMTP_USER || !env.SMTP_PASS) {
+    // Secrets pasted into a dashboard often pick up stray spaces or newlines.
+    const smtpUser = String(env.SMTP_USER || '').trim();
+    const smtpPass = String(env.SMTP_PASS || '').trim();
+    const smtpHost = String(env.SMTP_HOST || '').trim() || 'smtp.zoho.com.au';
+    const smtpPort = Number(env.SMTP_PORT) || 465;
+    const contactTo = String(env.CONTACT_TO || '').trim() || smtpUser;
+
+    if (!smtpUser || !smtpPass) {
         console.error('Contact form: SMTP_USER and SMTP_PASS are not set');
         return reply({ ok: false, error: 'Sorry, the contact form is not available right now.' }, 500);
     }
@@ -105,13 +112,13 @@ export async function handleContact(request, env, connect) {
     try {
         await sendMail({
             connect,
-            host: env.SMTP_HOST || 'smtp.zoho.com.au',
-            port: Number(env.SMTP_PORT) || 465,
-            user: env.SMTP_USER,
-            pass: env.SMTP_PASS,
-            from: env.SMTP_USER,
+            host: smtpHost,
+            port: smtpPort,
+            user: smtpUser,
+            pass: smtpPass,
+            from: smtpUser,
             fromName: 'Logos Hub Website',
-            to: env.CONTACT_TO || env.SMTP_USER,
+            to: contactTo,
             replyTo: { name, email },
             subject: `Website contact: ${name}`,
             text,
@@ -119,7 +126,12 @@ export async function handleContact(request, env, connect) {
         });
         return reply({ ok: true });
     } catch (err) {
-        console.error('Contact form send failed:', err && err.message);
+        // Never log the password itself; its length is enough to spot a bad paste.
+        console.error(
+            'Contact form send failed:',
+            err && err.message,
+            `(login ${JSON.stringify(smtpUser)}, password length ${smtpPass.length}, server ${smtpHost}:${smtpPort})`,
+        );
         return reply({ ok: false, error: "Sorry, we couldn't send your message right now. Please try again later." }, 502);
     }
 }

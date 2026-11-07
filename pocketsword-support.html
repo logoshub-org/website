@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketSword Support - Logos Hub</title>
+    <meta name="description" content="Get help with the PocketSword app for iPhone and iPad.">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/contact-form.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-area">
+                <img class="logo-icon" src="assets/img/logo.png" alt="Logos Hub logo">
+                <span class="logo-text">LOGOS HUB</span>
+            </a>
+            <nav aria-label="Main">
+                <ul>
+                    <li><a href="pocketsword.html" aria-current="page">PocketSword</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="legal">
+        <h1>PocketSword Support</h1>
+        <p class="updated">Need help, found a bug or have a question about PocketSword? Send us a message and we will reply by email.</p>
+
+        <form id="contact-form" class="contact-form" data-topic="PocketSword support" novalidate>
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
+            </div>
+
+            <div class="field">
+                <label for="message">How can we help?</label>
+                <textarea id="message" name="message" maxlength="4900" required></textarea>
+            </div>
+
+            <!-- Spam trap: real visitors never see or fill this in. -->
+            <div class="hp" aria-hidden="true">
+                <label for="company_url">Leave this field empty</label>
+                <input type="text" id="company_url" name="company_url" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn-cta">Send message</button>
+
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+            <noscript><p class="form-status error">Please turn on JavaScript to send a message.</p></noscript>
+        </form>
+
+        <p class="form-note">Please include your iPhone or iPad model and iOS version if you are reporting a problem. Do not include sensitive personal information. See the <a href="pocketsword-privacy.html">PocketSword Privacy Policy</a>.</p>
+
+        <p class="form-note">PocketSword is open source. You can find the code on <a href="https://github.com/logoshub-org/pocketsword" rel="noopener">GitHub</a>.</p>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <img class="footer-logo" src="assets/img/logo.png" alt="Logos Hub logo">
+            <p>&copy; 2026 Logos Hub. All rights reserved. www.logoshub.org</p>
+            <div class="footer-links">
+                <a href="pocketsword.html">PocketSword</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -23,6 +23,7 @@
         var name = form.elements.name.value.trim();
         var email = form.elements.email.value.trim();
         var message = form.elements.message.value.trim();
+        var topic = form.getAttribute('data-topic');
 
         if (!name) {
             show('Please enter your name.', 'error');
@@ -49,7 +50,8 @@
             body: JSON.stringify({
                 name: name,
                 email: email,
-                message: message,
+                // A page can label its messages (e.g. data-topic="PocketSword support").
+                message: topic ? '[' + topic + '] ' + message : message,
                 company_url: form.elements.company_url.value,
                 elapsed: Math.round(performance.now())
             })
