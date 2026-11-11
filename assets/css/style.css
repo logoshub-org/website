@@ -143,6 +143,15 @@ nav a[aria-current="page"] {
     margin: 0 auto 2.5rem auto;
 }
 
+.hero-description a {
+    color: var(--primary-purple);
+    text-decoration: underline;
+}
+
+.hero-description a:hover {
+    text-decoration: none;
+}
+
 .hero-buttons {
     display: flex;
     justify-content: center;

@@ -64,20 +64,22 @@ Text for 31 December.</pre>
                 <p>Use plain text. A line that ends in a space inside an entry should end with a backslash (<code>\</code>) so that words do not join.</p>
             </li>
             <li>
-                <p>Build the module data with <code>imp2ld</code>:</p>
-<pre>imp2ld mydevo.imp MyDevo 2</pre>
-                <p>The last argument chooses the storage format (<code>4</code>, <code>2</code> or <code>z</code>). CrossWire's notes say the tool does not always build correctly without it, so use <code>2</code>. This makes a <code>RawLD</code> module: a <code>.idx</code> file and a <code>.dat</code> file named after the module.</p>
+                <p>Make the folder for the data files, then build the module data with <code>imp2ld</code>:</p>
+<pre>mkdir -p modules/lexdict/rawld/devotionals/mydevo
+imp2ld mydevo.imp -o modules/lexdict/rawld/devotionals/mydevo/mydevo</pre>
+                <p>This makes a <code>RawLD</code> module: a <code>.idx</code> file and a <code>.dat</code> file named after the module, written where you pointed <code>-o</code>. That is how current versions of the tool take their options. Older versions took the storage format as the last argument instead (<code>imp2ld mydevo.imp MyDevo 2</code>), so run the tool with no arguments to see which yours expects.</p>
             </li>
             <li>
-                <p>Put the two files in <code>modules/lexdict/rawld/mydevo/</code>.</p>
+                <p>If you did not write them there with <code>-o</code>, put the two files in <code>modules/lexdict/rawld/devotionals/mydevo/</code>, the folder CrossWire's own devotionals use.</p>
             </li>
             <li>
                 <p>Write <code>mods.d/mydevo.conf</code>:</p>
 <pre>[MyDevo]
-DataPath=./modules/lexdict/rawld/mydevo/mydevo
+DataPath=./modules/lexdict/rawld/devotionals/mydevo/mydevo
 ModDrv=RawLD
 Encoding=UTF-8
 SourceType=Plain
+Feature=DailyDevotion
 Category=Daily Devotional
 Lang=en
 Version=1.0
@@ -85,12 +87,31 @@ Description=My daily devotional
 About=Who wrote it and where it comes from.
 DistributionLicense=Copyrighted; permission to distribute granted by the author
 TextSource=Where the text came from</pre>
-                <p><code>Category=Daily Devotional</code> is what makes PocketSword list the module under Devotionals. <code>DataPath</code> names the data files without their extension. Use a licence line that is true for your text.</p>
+                <p><code>Category=Daily Devotional</code> is what makes PocketSword list the module under Devotionals; <code>Feature=DailyDevotion</code> is the line other SWORD programs look for. <code>DataPath</code> names the data files without their extension. <code>SourceType=Plain</code> shows the text as it is; use <code>SourceType=ThML</code> to add formatting and links to Bible passages (see below). Use a licence line that is true for your text.</p>
             </li>
             <li>
                 <p>Zip the <code>mods.d</code> and <code>modules</code> folders so that both are at the top of the zip (see "Upload it to your device" below).</p>
             </li>
         </ol>
+
+        <h2>A reading plan, or a devotional that points to the Bible</h2>
+        <p>A reading plan is made the same way as a devotional, with <code>SourceType=ThML</code> in the <code>.conf</code> and links to the passages in each entry. Give the passage as a <code>scripRef</code>:</p>
+<pre>$$$01.01
+&lt;p&gt;&lt;b&gt;Day 1&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Creation and the first people. God makes everything and calls it good.&lt;/p&gt;
+&lt;p&gt;Genesis &lt;scripRef passage="Genesis 1-3"&gt;1-3&lt;/scripRef&gt;&lt;/p&gt;
+$$$01.02
+&lt;p&gt;&lt;b&gt;Day 2&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Psalms &lt;scripRef passage="Psalms 7"&gt;7&lt;/scripRef&gt;, &lt;scripRef passage="Psalms 27"&gt;27&lt;/scripRef&gt;&lt;/p&gt;</pre>
+        <p>Write the text for the day (a summary of what the readings cover, if you like) and then the passages. A passage can be a chapter, a range of chapters (<code>Genesis 4-7</code>) or a list. Use the full English book names, which every SWORD program understands. A ThML entry is plain text with a few tags: <code>&lt;p&gt;</code> for paragraphs, <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code>, and <code>&lt;scripRef&gt;</code>. Escape <code>&amp;</code> and <code>&lt;</code> in your own words as <code>&amp;amp;</code> and <code>&amp;lt;</code>.</p>
+
+        <h2>What you see in PocketSword</h2>
+        <ul>
+            <li>The Devotionals tab shows a strip of days, with today in a box. Roll it sideways to other days; a <strong>Today</strong> button appears when you have gone away from today, and a swipe on the text moves a day.</li>
+            <li>A <strong>tick</strong> shows on each day you have read. A day of text is read when you scroll to the end of it. A day that names Bible passages is read when you have read its chapters to the end.</li>
+            <li>On a day with passages a <strong>Start Reading</strong> button opens the first chapter in the Bible tab. The arrows and the title step through only that day's chapters, and a tick at the top right finishes the day and takes you back to Devotionals. The cross at the top left leaves without ticking it.</li>
+            <li>The ticks are kept for each year, so you can read the same plan again next year.</li>
+        </ul>
 
         <h2>How to make a commentary</h2>
         <p>A commentary is keyed by verse instead of by date. One entry can cover a range of verses.</p>
@@ -132,8 +153,8 @@ Versification=KJV</pre>
             <li>Make the zip. The folders must be at the top level, with no outer folder around them:
 <pre>mymodule.zip
   mods.d/mydevo.conf
-  modules/lexdict/rawld/mydevo/mydevo.idx
-  modules/lexdict/rawld/mydevo/mydevo.dat</pre>
+  modules/lexdict/rawld/devotionals/mydevo/mydevo.idx
+  modules/lexdict/rawld/devotionals/mydevo/mydevo.dat</pre>
                 This is the same layout as CrossWire's "raw zip" packages. On a Mac, select <code>mods.d</code> and <code>modules</code> together and compress them, rather than compressing a folder that holds them.
             </li>
             <li>In PocketSword, open Preferences and turn on <strong>Module Maintainer Mode</strong>.</li>
@@ -149,6 +170,8 @@ Versification=KJV</pre>
             <li><strong>The page will not open:</strong> check both devices are on the same Wi-Fi network, and that Local Network access is allowed for PocketSword in iOS Settings.</li>
             <li><strong>The upload says "Installed" but the module is missing:</strong> check the <code>.conf</code> file name, that <code>DataPath</code> matches the folder, and that <code>ModDrv</code> matches the data format.</li>
             <li><strong>A devotional is not in the Devotionals list:</strong> check it has <code>Category=Daily Devotional</code>.</li>
+            <li><strong>A day shows no Start Reading button:</strong> the entry needs its passages as <code>scripRef</code> links, and the module needs <code>SourceType=ThML</code>.</li>
+            <li><strong>A day is empty:</strong> the key must be exactly <code>MM.DD</code> with two digits each, such as <code>03.07</code>.</li>
             <li><strong>Still stuck:</strong> <a href="pocketsword-support.html">send us a message</a> and attach the <code>.conf</code> file.</li>
         </ul>
 
