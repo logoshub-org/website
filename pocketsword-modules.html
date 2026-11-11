@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Your Own Modules - PocketSword - Logos Hub</title>
+    <meta name="description" content="How to make a devotional or commentary module for PocketSword, where to get the tools, and how to upload it to your iPhone or iPad.">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-area">
+                <img class="logo-icon" src="assets/img/logo.png" alt="Logos Hub logo">
+                <span class="logo-text">LOGOS HUB</span>
+            </a>
+            <nav aria-label="Main">
+                <ul>
+                    <li><a href="pocketsword.html" aria-current="page">PocketSword</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="legal">
+        <h1>Make Your Own Modules</h1>
+        <p class="updated">How to make a devotional or a commentary for PocketSword, where to get the tools, and how to put the result on your iPhone or iPad.</p>
+
+        <p>PocketSword reads standard SWORD modules, the same format used by <a href="https://crosswire.org/sword/index.jsp" rel="noopener">The SWORD Project</a> and programs such as Xiphos. A module you make works in any of them. Most people never need this page: the app's built-in downloader installs the ready-made modules from CrossWire and eBible.org.</p>
+
+        <h2>What a module is</h2>
+        <p>A module is two things:</p>
+        <ul>
+            <li>a small settings file, <code>mods.d/&lt;name&gt;.conf</code>, that says what the module is; and</li>
+            <li>the data files, in a folder under <code>modules/</code>, made from your text by a SWORD tool.</li>
+        </ul>
+        <p>The tools turn a plain text file in the <em>IMP</em> format into the data files. In an IMP file each entry starts with a line <code>$$$</code> followed by its key, then the text of the entry, up to the next <code>$$$</code> line.</p>
+
+        <h2>Where to get the tools</h2>
+        <p>The tools (<code>imp2ld</code>, <code>imp2vs</code>, <code>osis2mod</code> and others) come with the SWORD utilities from CrossWire. The CrossWire wiki page <a href="https://wiki.crosswire.org/DevTools:Modules" rel="noopener">DevTools: Modules</a> lists the current downloads and describes each tool.</p>
+        <ul>
+            <li><strong>Linux:</strong> install them from your distribution. On Debian and Ubuntu the package is <code>libsword-utils</code>.</li>
+            <li><strong>Windows:</strong> download the utilities from CrossWire's file mirror, as the wiki page describes. They need the ICU data library (<code>icudt</code> DLL) in the same folder. The Xiphos project also provides a set of the tools.</li>
+            <li><strong>Mac:</strong> build the SWORD library and utilities from the source on the CrossWire site. The wiki page has the current instructions.</li>
+        </ul>
+        <p>Run any tool with no arguments to see its usage. The options can change between versions, so check what yours prints.</p>
+
+        <h2>How to make a devotional</h2>
+        <p>A daily devotional is a dictionary-type module whose keys are dates written <code>MM.DD</code>.</p>
+        <ol>
+            <li>
+                <p>Write the text file, <code>mydevo.imp</code>, one entry per day (all 366, including <code>02.29</code>):</p>
+<pre>$$$01.01
+Text for 1 January.
+$$$01.02
+Text for 2 January.
+$$$12.31
+Text for 31 December.</pre>
+                <p>Use plain text. A line that ends in a space inside an entry should end with a backslash (<code>\</code>) so that words do not join.</p>
+            </li>
+            <li>
+                <p>Build the module data with <code>imp2ld</code>:</p>
+<pre>imp2ld mydevo.imp MyDevo 2</pre>
+                <p>The last argument chooses the storage format (<code>4</code>, <code>2</code> or <code>z</code>). CrossWire's notes say the tool does not always build correctly without it, so use <code>2</code>. This makes a <code>RawLD</code> module: a <code>.idx</code> file and a <code>.dat</code> file named after the module.</p>
+            </li>
+            <li>
+                <p>Put the two files in <code>modules/lexdict/rawld/mydevo/</code>.</p>
+            </li>
+            <li>
+                <p>Write <code>mods.d/mydevo.conf</code>:</p>
+<pre>[MyDevo]
+DataPath=./modules/lexdict/rawld/mydevo/mydevo
+ModDrv=RawLD
+Encoding=UTF-8
+SourceType=Plain
+Category=Daily Devotional
+Lang=en
+Version=1.0
+Description=My daily devotional
+About=Who wrote it and where it comes from.
+DistributionLicense=Copyrighted; permission to distribute granted by the author
+TextSource=Where the text came from</pre>
+                <p><code>Category=Daily Devotional</code> is what makes PocketSword list the module under Devotionals. <code>DataPath</code> names the data files without their extension. Use a licence line that is true for your text.</p>
+            </li>
+            <li>
+                <p>Zip the <code>mods.d</code> and <code>modules</code> folders so that both are at the top of the zip (see "Upload it to your device" below).</p>
+            </li>
+        </ol>
+
+        <h2>How to make a commentary</h2>
+        <p>A commentary is keyed by verse instead of by date. One entry can cover a range of verses.</p>
+        <ol>
+            <li>
+                <p>Write the text file, <code>mycomm.imp</code>. Keys name a verse, a chapter or a range:</p>
+<pre>$$$Genesis 1:1-5
+Notes on the first five verses.
+$$$Genesis 1:6
+Notes on verse six.
+$$$Exodus 1
+Notes on the whole chapter.</pre>
+            </li>
+            <li>
+                <p>Build the module data with <code>imp2vs</code>:</p>
+<pre>imp2vs mycomm.imp</pre>
+                <p>The tool takes the file and, optionally, an output path. If your text is already in OSIS XML, CrossWire's page says to use <code>osis2mod</code> instead. Run each tool with no arguments to see its options.</p>
+            </li>
+            <li>
+                <p>Put the data files under <code>modules/comments/</code> in a folder named after the module, in the same way as for the devotional.</p>
+            </li>
+            <li>
+                <p>Write <code>mods.d/mycomm.conf</code>. It has the same keys as the devotional's, with these differences:</p>
+<pre>[MyComm]
+DataPath=./modules/comments/rawcom/mycomm/
+ModDrv=RawCom
+Versification=KJV</pre>
+                <p><code>ModDrv</code> must match the format of the files the tool wrote (<code>RawCom</code>, <code>RawCom4</code>, <code>zCom</code> or <code>zCom4</code>), and <code>DataPath</code> must match where you put them. <code>Versification</code> says which verse numbering your keys follow (<code>KJV</code> is the common English one). Leave out <code>Category=Daily Devotional</code>.</p>
+            </li>
+            <li>
+                <p>Zip the <code>mods.d</code> and <code>modules</code> folders as for the devotional.</p>
+            </li>
+        </ol>
+        <p class="note">The devotional steps follow CrossWire's documentation for <code>imp2ld</code>. For commentaries, check the driver name and the data path your tool actually produced before you write the <code>.conf</code>. A wrong <code>ModDrv</code> or <code>DataPath</code> is the usual reason a module installs but does not show.</p>
+
+        <h2>Upload it to your device</h2>
+        <p>PocketSword has a <em>Module Maintainer Mode</em> for installing a module you made without publishing it. You send the zip from a web browser on a computer on the same Wi-Fi network as your iPhone or iPad.</p>
+        <ol>
+            <li>Make the zip. The folders must be at the top level, with no outer folder around them:
+<pre>mymodule.zip
+  mods.d/mydevo.conf
+  modules/lexdict/rawld/mydevo/mydevo.idx
+  modules/lexdict/rawld/mydevo/mydevo.dat</pre>
+                This is the same layout as CrossWire's "raw zip" packages. On a Mac, select <code>mods.d</code> and <code>modules</code> together and compress them, rather than compressing a folder that holds them.
+            </li>
+            <li>In PocketSword, open Preferences and turn on <strong>Module Maintainer Mode</strong>.</li>
+            <li>Go to the Downloads screen, open its sources menu and choose <strong>Module Maintainer Mode</strong>. iOS asks for permission to use the local network the first time. Allow it.</li>
+            <li>The app shows one or two web addresses, such as <code>http://192.168.1.20:52000</code>. Open one in a browser on your computer. Both devices must be on the same network. A guest network or a VPN can block this.</li>
+            <li>On the page that opens, choose your zip file and press <strong>Upload</strong>. The page says "Installed" when it is done. The module is installed on the device, and a search index is built there.</li>
+            <li>Close the screen in the app. Find your module under its tab: Devotionals for a devotional, Commentary for a commentary.</li>
+        </ol>
+        <p>The upload page only accepts <code>.zip</code> files, and it lists the modules already installed on the device. Turn Module Maintainer Mode off when you have finished. The web page works only while the screen in the app is open.</p>
+
+        <h2>If it does not work</h2>
+        <ul>
+            <li><strong>The page will not open:</strong> check both devices are on the same Wi-Fi network, and that Local Network access is allowed for PocketSword in iOS Settings.</li>
+            <li><strong>The upload says "Installed" but the module is missing:</strong> check the <code>.conf</code> file name, that <code>DataPath</code> matches the folder, and that <code>ModDrv</code> matches the data format.</li>
+            <li><strong>A devotional is not in the Devotionals list:</strong> check it has <code>Category=Daily Devotional</code>.</li>
+            <li><strong>Still stuck:</strong> <a href="pocketsword-support.html">send us a message</a> and attach the <code>.conf</code> file.</li>
+        </ul>
+
+        <p>Modules you make from other people's texts must follow their licence. To publish a module for everyone, see CrossWire's guidance on submitting modules.</p>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <img class="footer-logo" src="assets/img/logo.png" alt="Logos Hub logo">
+            <p>&copy; 2026 Logos Hub. All rights reserved. www.logoshub.org</p>
+            <div class="footer-links">
+                <a href="pocketsword.html">PocketSword</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
