@@ -1,5 +1,6 @@
 :root {
-    --primary-purple: #8E24AA;
+    --primary-purple: #874DCE;
+    --primary-purple-dark: #6E3AB0;
     --slate-gray: #536872;
     --dark-bg: #1a1a1a;
     --light-bg: #fdfdfd;
@@ -56,7 +57,7 @@ header {
     font-family: 'Noto Serif', 'Segoe UI', serif;
     font-size: 1.5rem;
     font-weight: 900;
-    color: #000000;
+    color: var(--primary-purple);
     letter-spacing: 1px;
     word-spacing: 0.15em;
 }
@@ -74,7 +75,7 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: var(--slate-gray);
+    color: var(--primary-purple);
     font-weight: 600;
     font-size: 1.05rem;
     transition: color 0.3s;
@@ -82,7 +83,7 @@ nav a {
 
 nav a:hover,
 nav a[aria-current="page"] {
-    color: var(--primary-purple);
+    color: var(--primary-purple-dark);
 }
 
 .btn-cta {
@@ -96,7 +97,7 @@ nav a[aria-current="page"] {
 }
 
 .btn-cta:hover {
-    background-color: #7B1FA2;
+    background-color: var(--primary-purple-dark);
 }
 
 /* Hero Section */
@@ -123,7 +124,7 @@ nav a[aria-current="page"] {
     font-family: 'Noto Serif', 'Segoe UI', serif;
     font-size: 3.5rem;
     font-weight: 900;
-    color: #000000;
+    color: var(--primary-purple);
     margin-bottom: 0.5rem;
     letter-spacing: 1px;
     word-spacing: 0.15em;
@@ -445,13 +446,13 @@ footer {
 }
 
 .footer-links a {
-    color: var(--slate-gray);
+    color: var(--primary-purple);
     text-decoration: none;
     font-size: 0.9rem;
 }
 
 .footer-links a:hover {
-    color: var(--primary-purple);
+    color: var(--primary-purple-dark);
 }
 
 @media (max-width: 600px) {
