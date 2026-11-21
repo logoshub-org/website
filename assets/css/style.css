@@ -1,6 +1,7 @@
 :root {
     --primary-purple: #874DCE;
     --primary-purple-dark: #6E3AB0;
+    --pocketsword-blue: #0064F7;
     --slate-gray: #536872;
     --dark-bg: #1a1a1a;
     --light-bg: #fdfdfd;
@@ -51,6 +52,8 @@ header {
     width: 45px;
     height: 45px;
     object-fit: contain;
+    /* The heavy book sits low in the artwork; lift it so it looks centred with the text */
+    transform: translateY(-4px);
 }
 
 .logo-text {
@@ -74,9 +77,10 @@ nav {
 }
 
 nav a {
+    font-family: 'Noto Serif', 'Segoe UI', serif;
     text-decoration: none;
     color: var(--primary-purple);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.05rem;
     transition: color 0.3s;
 }
@@ -102,7 +106,7 @@ nav a[aria-current="page"] {
 
 /* Hero Section */
 .hero {
-    padding: 5rem 2rem;
+    padding: 2.5rem 2rem 3.5rem 2rem;
     text-align: center;
     background: linear-gradient(135deg, #f9f5fc 0%, #f0f4f6 100%);
     border-bottom: 1px solid #eef2f4;
@@ -117,7 +121,7 @@ nav a[aria-current="page"] {
     width: 120px;
     height: 120px;
     object-fit: contain;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .hero h1 {
@@ -134,14 +138,14 @@ nav a[aria-current="page"] {
     font-size: 1.6rem;
     color: var(--slate-gray);
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .hero-description {
     font-size: 1.2rem;
     color: var(--text-main);
     max-width: 750px;
-    margin: 0 auto 2.5rem auto;
+    margin: 0 auto 2rem auto;
 }
 
 .hero-description a {
@@ -194,7 +198,7 @@ nav a[aria-current="page"] {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .app-icon {
@@ -206,6 +210,7 @@ nav a[aria-current="page"] {
 }
 
 .legal .app-heading h1 {
+    color: var(--pocketsword-blue);
     margin-bottom: 0.2rem;
 }
 
@@ -278,7 +283,7 @@ nav a[aria-current="page"] {
 .legal {
     max-width: 800px;
     margin: 0 auto;
-    padding: 4rem 2rem 5rem 2rem;
+    padding: 2rem 2rem 4rem 2rem;
 }
 
 .legal h1 {
@@ -292,13 +297,13 @@ nav a[aria-current="page"] {
 .legal .updated {
     color: var(--text-muted);
     font-size: 0.95rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .legal h2 {
     font-size: 1.3rem;
     color: #000000;
-    margin: 2.2rem 0 0.7rem 0;
+    margin: 1.6rem 0 0.5rem 0;
 }
 
 .legal p,
